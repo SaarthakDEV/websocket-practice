@@ -12,21 +12,18 @@ let connectedUser = 0
 
 
 wss.on('connection', (socketInstance: any) => {
-    console.log(socketInstance)
     socketInstance.on('error', console.error)
 
     socketInstance.on('message', (data: any, isBinary: boolean) => {
 
         // All the client connected to this web socket connection
         wss.clients.forEach(client => {
-
             // Check if connection is open or not
             if(client.readyState === WebSocket.OPEN){
                 // Emit data to clients
                 client.send(data, { binary: isBinary });
             }
         })
-    console.log(data)
 })
 
     // Connection message when a client is connected
